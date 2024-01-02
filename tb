@@ -1,0 +1,38 @@
+`timescale 1ns / 1ps
+
+
+module tb();
+  reg [3:0] a, b;
+  reg [2:0] s;
+  wire [7:0] y;
+
+  alu alu_inst (.a(a), .b(b), .s(s), .y(y));
+
+  initial begin
+    $display("Testing ALU Operations:");
+
+    // Test case 1: Addition
+    a = 4'b0010;  // 2
+    b = 4'b0011;  // 3
+    s = 3'b000;   // Addition
+    #10;
+    $display("Operation: a + b = %d", y); // Expected output: 5
+
+    // Test case 2: Bitwise AND
+    a = 4'b1100;  // 12
+    b = 4'b1010;  // 10
+    s = 3'b010;   // Bitwise AND
+    #10;
+    $display("Operation: a & b = %d", y); // Expected output: 8
+
+    // Test case 3: Arithmetic right shift
+    a = 4'b1110;  // -2
+    s = 3'b111;   // Arithmetic right shift
+    #10;
+    $display("Operation: a >> 1 = %d", y); // Expected output: -1
+
+    // Add more test cases as needed...
+
+    $finish;
+  end
+endmodule
